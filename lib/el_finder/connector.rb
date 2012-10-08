@@ -48,6 +48,7 @@ module ElFinder
       raise(ArgumentError, "Image Handler is invalid") unless image_handler.nil? || ([:size, :resize, :thumbnail].all?{|m| image_handler.respond_to?(m)})
 
       @root = ElFinder::Pathname.new(options[:root])
+      @start_path = ElFinder::Pathname.new(options[:startPath]) if options[:startPath]
 
       @headers = {}
       @response = {}
@@ -127,7 +128,7 @@ module ElFinder
       target ||= @target
 
       if target.nil?
-        _open(@root)
+        _open(@start_path || @root)
         return
       end
 
