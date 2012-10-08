@@ -127,6 +127,7 @@ module ElFinder
     def _open(target = nil)
       target ||= @target
 
+      @response[:error] = "Hello"
       if target.nil?
         _open(@start_path || @root)
         return
