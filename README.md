@@ -1,6 +1,8 @@
 Changes made by Joe Kurleto
 
 This is a fork of the el_finder ruby connector, with added support for a startPath option (available in 2.x elFinder, but this connector was built for 1.x).
+It also hacks at Connector#tree_for to improve performance with many files/folders, by not returning the entire tree, but only
+ancestor/cousin directories of the target path.
 
 ORIGINAL README:
 
