@@ -1,3 +1,9 @@
+Changes made by Joe Kurleto
+
+This is a fork of the el_finder ruby connector, with added support for a startPath option (available in 2.x elFinder, but this connector was built for 1.x).
+
+ORIGINAL README:
+
 ## el_finder
 
 * http://elrte.org/redmine/projects/elfinder
