@@ -149,7 +149,7 @@ module ElFinder
           @response[:tree] = {
             :name => @options[:home],
             :hash => to_hash(@root),
-            :dirs => tree_for(@root),
+            :dirs => tree_for(@root, target),
           }.merge(perms_for(@root))
         end
 
@@ -520,13 +520,15 @@ module ElFinder
     end
 
     #
-    def tree_for(root)
-      child_directories_for(root).
+    def tree_for(path, target)
+      # if target is a child of current path, we want to know the deeper directory structure;
+      # otherwise, we wont bother diving deeper into this branch of the tree
+      target_is_child = !target.to_s.match(/\A#{path.to_s}/).nil?
+      child_directories_for(path).
       map { |child|
           {:name => child.basename.to_s,
            :hash => to_hash(child),
-           #:dirs => tree_for(child),
-           :dirs => []
+           :dirs => target_is_child ? tree_for(child, target) : [],
           }.merge(perms_for(child))
       }
     end # of tree_for
